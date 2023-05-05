@@ -1,3 +1,82 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "react/react-in-jsx-scope": "off", // JSX 문법을 사용할 때 React가 있어야함
+    "spaced-comment": "off", //주석만 있는 라인 가능
+    "react/jsx-first-prop-new-line": [
+      1,
+      "multiline"
+    ], // property가 존재할 경우 일관된 줄바꿈 적용
+    "react/jsx-max-props-per-line": [
+      1,
+      {
+        "maximum": 1
+      }
+    ], // element attribute 최대 1개 이상이면 멀티라인
+    "object-curly-newline": [
+      "error",
+      { // 중괄호를 열고 닫기 전에 일관된 줄바꿈 적용
+        "multiline": true
+      }
+    ],
+    "func-names": 0, // 이름없는 함수 허용
+    "object-property-newline": [
+      "error",
+      {
+        "allowAllPropertiesOnSameLine": false
+      }
+    ], // 별도의 줄에 객체 속성 배치
+    "eqeqeq": [
+      "error",
+      "smart"
+    ], // ''==='' 만허용
+    "camelcase": "off", // 카멜케이스가 아닐시 에러
+    "no-var": "error", // var 사용 금지
+    "array-bracket-spacing": [
+      "error",
+      "never"
+    ], // 배열 간격 필수
+    "arrow-parens": [
+      "error",
+      "as-needed"
+    ], //화살표 함수에서 인수 하나일시 괄호 생략
+    "arrow-spacing": "error", // 화살표함수 간격 조절 ex) const func=>() error
+    "block-spacing": "error", // 블럭스코프 간격 조절
+    "indent": [
+      2,
+      "tab"
+    ], // 탭간격
+    "no-tabs": 0, // no-tab 허용
+    "global-require": 0, // 최상위 모둘 범위에서 require 허용
+    "import/no-unresolved": 0,
+    "import/prefer-default-export": "off",
+    "import/extensions": [
+      "off"
+    ],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": false
+      }
+    ],
+    "jsx-quotes": [
+      "error",
+      "prefer-double"
+    ],
+    "no-plusplus": [
+      "error",
+      {
+        "allowForLoopAfterthoughts": true
+      }
+    ],
+    "no-alert": "off",
+    "no-useless-escape": "off",
+    "no-nested-ternary": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ]
+  }
 }
