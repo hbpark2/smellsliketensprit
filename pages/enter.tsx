@@ -1,13 +1,35 @@
 import type { NextPage } from "next";
 import { useState } from "react";
-import Button from "../components/button";
-import Input from "../components/input";
-import { cls } from "../libs/utils";
+import Button from "@/components/button";
+import Input from "@/components/input";
+import { cls } from "@/libs/client/utils";
+import { useForm } from "react-hook-form";
+import useMutation from "@/libs/client/useMutation";
+
+interface EnterForm {
+  email?: string;
+  phone?: string;
+}
 
 const Enter: NextPage = () => {
+	const [enter,{loading, data, error}] = useMutation("/api/users/enter")
+	const { register, watch, reset, handleSubmit } = useForm<EnterForm>()
 	const [method, setMethod] = useState<"email" | "phone">("email");
-	const onEmailClick = () => setMethod("email");
-	const onPhoneClick = () => setMethod("phone");
+	const [submitting, setSubmitting] = useState(false)
+	const onEmailClick = () => {
+		reset()
+		setMethod("email") 
+	};
+	const onPhoneClick = () => {
+		reset()
+		setMethod("phone") 
+	};
+
+	const onValid = (validForm: EnterForm) => {
+		enter(validForm)
+	}
+
+
 	return (
 		<div className="mt-16 px-4">
 			<h3 className="text-3xl font-bold text-center">Enter to Carrot</h3>
@@ -39,16 +61,21 @@ const Enter: NextPage = () => {
 						</button>
 					</div>
 				</div>
-				<form className="flex flex-col mt-8 space-y-4">
+				<form
+					onSubmit={handleSubmit(onValid)}
+					className="flex flex-col mt-8 space-y-4">
 					{method === "email" ? (
 						<Input
+							register={register('email',{required:true})}
 							name="email"
 							label="Email address"
 							type="email"
-							required />
+							required
+						/>
 					) : null}
 					{method === "phone" ? (
 						<Input
+							register={register('phone',{required:true})}
 							name="phone"
 							label="Phone number"
 							type="number"
@@ -56,7 +83,7 @@ const Enter: NextPage = () => {
 							required
 						/>
 					) : null}
-					{method === "email" ? <Button text={"Get login link"} /> : null}
+					{method === "email" ? <Button text={submitting ? "Loading":"Get login link"} /> : null}
 					{method === "phone" ? (
 						<Button text={"Get one-time password"} />
 					) : null}

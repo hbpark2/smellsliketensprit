@@ -1,5 +1,9 @@
 {
   "extends": "next/core-web-vitals",
+  "plugins": [
+    "react",
+    "prettier"
+  ],
   "rules": {
     "react/react-in-jsx-scope": "off", // JSX 문법을 사용할 때 React가 있어야함
     "spaced-comment": "off", //주석만 있는 라인 가능
